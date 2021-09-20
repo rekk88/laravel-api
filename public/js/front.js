@@ -2023,6 +2023,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.lastPage = response.data.results.last_page;
         console.log(response.data.results.current_page);
       });
+    },
+    cutPost: function cutPost(text, maxLength) {
+      if (text.length > maxLength) {
+        return text.substr(0, maxLength) + '...';
+      }
+
+      return text;
     }
   }
 });
@@ -37839,7 +37846,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
-                _vm._v(_vm._s(post.content))
+                _vm._v(_vm._s(_vm.cutPost(post.content, 150)))
               ]),
               _vm._v(" "),
               _c(
@@ -37885,21 +37892,29 @@ var render = function() {
             ),
             _vm._v(" "),
             _vm._l(_vm.lastPage, function(i) {
-              return _c("li", { key: i, staticClass: "page-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        return _vm.getPosts(i)
+              return _c(
+                "li",
+                {
+                  key: i,
+                  staticClass: "page-item",
+                  class: { active: _vm.currentPage == i }
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.getPosts(i)
+                        }
                       }
-                    }
-                  },
-                  [_vm._v(_vm._s(i))]
-                )
-              ])
+                    },
+                    [_vm._v(_vm._s(i))]
+                  )
+                ]
+              )
             }),
             _vm._v(" "),
             _c(

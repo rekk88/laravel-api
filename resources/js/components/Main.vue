@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
-            <p class="card-text">{{post.content}}</p>
+            <p class="card-text">{{cutPost(post.content,150)}}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
@@ -29,7 +29,7 @@
           <button class="page-link"  @click="getPosts(currentPage - 1)">Previous</button>
         </li>
 
-        <li class="page-item" v-for="i in lastPage" :key="i"><a href="#" class="page-link" @click="getPosts(i)">{{i}}</a></li>
+        <li class="page-item" :class="{'active' : currentPage == i}" v-for="i in lastPage" :key="i"><a href="#" class="page-link" @click="getPosts(i)">{{i}}</a></li>
         
         <li class="page-item" :class="{'disabled' : currentPage == lastPage}">
           <button class="page-link" @click="getPosts(currentPage + 1)">Next</button>
@@ -71,6 +71,12 @@ export default {
 
               console.log(response.data.results.current_page);
            })
+    },
+    cutPost(text,maxLength){
+      if(text.length > maxLength){
+        return text.substr(0,maxLength) + '...';
+      }
+      return text;
     }
   },
 }
