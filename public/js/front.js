@@ -1991,6 +1991,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
   data: function data() {
@@ -2030,6 +2031,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return text;
+    },
+    dataFormat: function dataFormat(data) {
+      var postData = new Date(data);
+      return postData.getDate() + '/' + (postData.getMonth() + 1) + '/' + postData.getFullYear();
     }
   }
 });
@@ -37844,6 +37849,8 @@ var render = function() {
               _c("h5", { staticClass: "card-title" }, [
                 _vm._v(_vm._s(post.title))
               ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.dataFormat(post.created_at)))]),
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
                 _vm._v(_vm._s(_vm.cutPost(post.content, 150)))

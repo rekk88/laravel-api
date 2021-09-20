@@ -5,6 +5,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{post.title}}</h5>
+            <p>{{dataFormat(post.created_at)}}</p>
             <p class="card-text">{{cutPost(post.content,150)}}</p>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
@@ -77,6 +78,11 @@ export default {
         return text.substr(0,maxLength) + '...';
       }
       return text;
+    },
+    dataFormat(data){
+      const postData = new Date(data);
+
+      return postData.getDate() + '/' + (postData.getMonth()+1) + '/' + postData.getFullYear();
     }
   },
 }
